@@ -68,20 +68,20 @@ int main(int argc, char const *argv[])
 		nodes.push_back(new node(i));
 	graph G(nodes);
 
-	G.addVertex(0, 1);
-	G.addVertex(0, 9);
-	G.addVertex(1, 8);
-	G.addVertex(9, 8);
-	G.addVertex(8, 7);
-	G.addVertex(7, 10);
-	G.addVertex(10, 11);
-	G.addVertex(11, 7);
-	G.addVertex(7, 6);
-	G.addVertex(7, 3);
-	G.addVertex(3, 5);
-	G.addVertex(6, 5);
-	G.addVertex(3, 2);
-	G.addVertex(3, 4);
+	G.addEdge(0, 1);
+	G.addEdge(0, 9);
+	G.addEdge(1, 8);
+	G.addEdge(9, 8);
+	G.addEdge(8, 7);
+	G.addEdge(7, 10);
+	G.addEdge(10, 11);
+	G.addEdge(11, 7);
+	G.addEdge(7, 6);
+	G.addEdge(7, 3);
+	G.addEdge(3, 5);
+	G.addEdge(6, 5);
+	G.addEdge(3, 2);
+	G.addEdge(3, 4);
 
 	cout << "BFS Traversal" << endl;
 	vector<node*> path = BFS(G, 0, 2);

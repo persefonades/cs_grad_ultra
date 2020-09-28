@@ -30,40 +30,29 @@ void DFS_visit(node* u) {
 int main(int argc, char const *argv[])
 {
 	std::vector<node*> nodes;
-	nodes.push_back(new node(0));
-	nodes.push_back(new node(1));
-	nodes.push_back(new node(9));
-	nodes.push_back(new node(8));
-	nodes.push_back(new node(7));
-	nodes.push_back(new node(10));
-	nodes.push_back(new node(11));
-	nodes.push_back(new node(6));
-	nodes.push_back(new node(5));
-	nodes.push_back(new node(4));
-	nodes.push_back(new node(3));
-	nodes.push_back(new node(2));
+	for (int i = 0; i <= 12; ++i)
+		nodes.push_back(new node(i));
 	graph G(nodes);
 
-	G.addVertex(0, 1);
-	G.addVertex(0, 9);
-	G.addVertex(1, 8);
-	G.addVertex(9, 8);
-	G.addVertex(8, 7);
-	G.addVertex(7, 10);
-	G.addVertex(10, 11);
-	G.addVertex(11, 7);
-	G.addVertex(7, 6);
-	G.addVertex(7, 3);
-	G.addVertex(3, 5);
-	G.addVertex(6, 5);
-	G.addVertex(3, 2);
-	G.addVertex(3, 4);
-
-	G.display();
+	G.addEdge(0, 1);
+	G.addEdge(0, 9);
+	G.addEdge(1, 8);
+	G.addEdge(9, 8);
+	G.addEdge(8, 7);
+	G.addEdge(7, 10);
+	G.addEdge(10, 11);
+	G.addEdge(11, 7);
+	G.addEdge(7, 6);
+	G.addEdge(7, 3);
+	G.addEdge(3, 5);
+	G.addEdge(6, 5);
+	G.addEdge(3, 2);
+	G.addEdge(3, 4);
 
 	cout << "DFS Traversal" << endl;
 	DFS(G);
 	cout << endl;
 	
+	G.display();
 	return 0;
 }
