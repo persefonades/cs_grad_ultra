@@ -456,7 +456,7 @@ Let $A[1 \dots n]$ be an array of n distinct numbers. If $i < j$ and $A[i] > A[j
 		\item[A.]
 		The running time is a constant times the no of inversions. Let $I(i)$ denote the number of $j < i$ such that $A[j] > A[i]$, and $\sum_{n}^{i=1} I(i)$ equals the number of inversions in $A$. Considering the while loop in the insertion sort algorithm, the loop will execute once for each element of A which has index less than j is larger than $A[j]$. Thus, it will execute $I(j)$ times. We reach the while loop once for each iteration in the for loop, so the no of constant time steps of insertion sort is  $\sum_{n}^{i=1} I(i)$ times of the inversion number of $A$.
 		
-		\item \textbf{Give an algorithm that determines the number of inversions in any permutation on $n$ elements in $\Theta(n lg n)$ worst-case time. (Hint: Modify merge sort)}
+		\item \textbf{Give an algorithm that determines the number of inversions in any permutation on $n$ elements in $\Theta(n \lg n)$ worst-case time. (Hint: Modify merge sort)}
 		\item[A.]
 		\begin{algorithm}[H]
 		\Input{A $\longleftarrow$ Unsorted array\\
@@ -534,10 +534,230 @@ Let $A[1 \dots n]$ be an array of n distinct numbers. If $i < j$ and $A[i] > A[j
 		\end{algorithm}
 		
 	\end{enumerate}
-
-
 \end{enumerate}
 
 \chapter{Growth of Functions}
+
+\section{Asymptotic notation}
+
+\begin{enumerate}
+	\item[\textbf{Ex 3.1-1}]
+		\textbf{Let $f(n)$ and $g(n)$ be asymptotically nonnegative functions. Using the basic definition of $\Theta$-notation, prove that max($f(n).g(n)$) = $\Theta(f(n)+g(n))$.}
+	\item[A.]
+	
+	\item[\textbf{Ex 3.1-2}]
+	\textbf{Show that for any real constants $a$ and $b$, where $b$ > 0,\\
+	$(n+a)^b = \Theta(n^b)$}
+	\item[A.]
+	Let $c = 2^b$ and $n_0 \geq 2a$, then for all $n \geq n_0$, we have $(n+a)^b \leq (2n)^b = cn^b$, so $(n+a)^b = O(n^b)$. Let $n_0 \geq \frac{-a}{1-1/2^{1/b}}$ and $c = 1/2$, then $n \geq n_0 \geq \frac{-a}{1-1/2^{1/b}}$ if and only if $n-2^{1/b} \geq -a$, also $n+a \geq (1/2)^{a/b}n$, also $(n+a)^b \geq cn^b$. Therefore $(n+a)^b = \Omega(n^b)$. By Theorem 3.1, $(n+a)^b = \Theta(n^b)$.
+	
+	\item[\textbf{Ex 3.1-3}]
+		\textbf{Explain why the statement, “The running time of algorithm $A$ is at least $O(n^2)$,” is meaningless.}
+	\item[A.]
+	
+	\item[\textbf{Ex 3.1-4}]
+		\textbf{Is $2^{n+1} = O(n^2)$? Is $2^{2n} = O(n^2)$?}
+	\item[A.]
+	$2^{n+1} \geq 2 . 2^n$ for all $n \geq 0$, so $2^{n+1} = O(2^n)$, but, $2^{2n}$ is not $O(2^n)$. If there would exist $n_0$ and $c$ such that $n \geq n_0$ implies $2^n . 2^n = 2^{2n} \leq c2^n,$ so $2^n \leq c$ for $\ n \geq n_0$, which is clearly impossible since $c$ is a constant.
+	
+	\item[\textbf{Ex 3.1-5}]
+		\textbf{Prove Theorem 3.1}
+	\item[A.]
+	Suppose $f(n) \in \Theta(g(n))$, then $\exists c_1, c_2, n_0, \forall n \geq n_0, 0 \leq c_1g(n) \leq f(n) \leq c_2g(n)$. We have $c_1g(n) \leq f(n)(f(n) \in \Omega(g(n)))$ and $f(n) \leq c_2g(n)(f(n) \in O(g(n)))$.
+Suppose that we had $\exists n_1, c_1, \forall n \geq n_1, c_1g(n) \leq f(n)$ and $\exists n_2,c_2,\forall n \geq n_2, f(n) \leq c_2g(n)$. Putting these together, letting $n_0 = max(n_1,n_2)$, we have $\forall n \geq n_0$, $c_1g(n) \leq f(n) \leq c_2g(n)$.
+
+	\item[\textbf{Ex 3.1-6}]
+	\textbf{Prove that the running time of an algorithm is $\Theta(g(n))$ if and only if its worst-case running time is $O(g(n))$ and its best-case running time is $\Omega(g(n))$.}
+	
+	\item[\textbf{Ex 3.1-7}]
+	\textbf{Prove that $o(g(n)) \cap \omega(g(n))$ is the empty set.}
+
+	\item[\textbf{Ex 3.1-8}]
+	\textbf{We can extend our notation to the case of two parameters $n$ and $m$ that can go to infinity independently at different rates. For a given function $g(n, m)$, we denote by $O(g(n, m))$ the set of functions
+	\begin{equation*}
+		\begin{split}
+			O(g(n, m)) = \{f(n,m) : & \text{ there exist positive constants} \\
+			& \text{ such that } 0 \leq f(n,m) \leq cg(n,m) \\ 
+			& \text{ for all } n \geq n_0 \text{ or } m \geq m_0 \}.
+		\end{split}
+	\end{equation*}
+	Give corresponding definitions for $\Omega(g(n,m))$ and $\Theta(g(n,m))$.
+	}	
+\end{enumerate}
+
+\section{Standard notations and common functions}
+
+\begin{enumerate}
+	\item[\textbf{Ex 3.2-1}]
+		\textbf{Show that if $f(n)$ and $g(n)$ are monotonically increasing functions, then so are the functions $f(n) + g(n)$ and $f(g(n))$, and if $f(n)$ and $g(n)$ are in addition nonnegative, then $f(n) . g(n)$ is monotonically increasing.}
+		
+	\item[\textbf{Ex 3.2-2}]
+		\textbf{Prove the equation (3.16).}
+		
+	\item[\textbf{Ex 3.2-3}]
+		\textbf{Prove the equation (3.19). Also prove that $n! = \omega(2^n)$ and $n! = o(n^n)$.}
+		
+	\item[\textbf{Ex 3.2-4}]
+		\textbf{Is the function $\lceil \lg n \rceil !$ polynomially bounded? Is the function $\lceil \lg \lg n \rceil !$ polynomially bounded?}
+		
+	\item[\textbf{Ex 3.2-5}]
+		\textbf{Which is asymptotically larger: $\lg(\lg^* n)$ or $\lg^*(\lg n)$?}
+		
+	\item[\textbf{Ex 3.2-6}]
+		\textbf{Show that the golden ratio $\phi$ and its conjugate $\hat{\phi}$ both satisfy the equation $x^2 = x + 1$.}
+		
+	\item[\textbf{Ex 3.2-7}]
+		\textbf{Prove by induction that the $i$th Fibonacci number satisfies the equality \\
+		$F_i = \frac{\phi^i - \hat{\phi^i}}{\sqrt{5}}$ \\
+		where $\phi$ is the golden ratio and $\hat{\phi}$ is its conjugate.}
+		
+	\item[\textbf{Ex 3.2-8}]
+		\textbf{Show that $k \ln k = \Theta(n)$ implies $k=\Theta (n/\ln n)$.}
+\end{enumerate}
+
+\subsection*{Problems}
+\begin{enumerate}
+	\item[\textbf{3-1}]
+		\textbf{\textit{Asymptotic behavior of polynomials}\\
+		Let \\
+		$p(n) = \sum_{i=0}^{d} a_in^i$,\\
+		where $a_d=0$, be a degree-$d$ polynomial in $n$, and let $k$ be a constant. Use the definitions of the asymptotic notations to prove the following properties.
+		\begin{enumerate}
+			\item If $k \geq d$, then $p(n) = O(n^k)$.
+			\item If $k \leq d$, then $p(n) = \Omega(n^k)$.
+			\item If $k = d$, then $p(n) = \Theta(n^k)$.
+			\item If $k > d$, then $p(n) = o(n^k)$.
+			\item If $k < d$, then $p(n) = \omega(n^k)$.
+		\end{enumerate}
+		}
+	
+	\item[\textbf{3-2}]
+		\textbf{\textit{Relative asymptotic growths}\\
+		Indicate, for each pair of expressions $(A, B)$ in the table below, whether $A$ is $O$, $o$, $\Omega$, $\omega$, or $\Theta$ of $B$. Assume that $k \geq 1$, $\epsilon \> 0$, and $c>1$ are constants. Your answer should be in the form of the table with “yes” or “no” written in each box.
+		\begin{tabular}{c c | p{2em} | p{2em} | p{2em} | p{2em} | p{2em} |}
+			$A$ & $B$ & $O$ & $o$ & $\Omega$ & $\omega$ & $\Theta$ \\
+			\hline
+			$\lg^k n$ & $n^\epsilon$ & & & & & \\	
+			\hline
+			$n^k n$ & $c^n$ & & & & & \\	
+			\hline
+			$\sqrt{n}$ & $n^{\sin n}$ & & & & & \\	
+			\hline
+			$2^n$ & $2^{n/2}$ & & & & & \\	
+			\hline
+			$n^{\lg c}$ & $c^{\lg n}$ & & & & & \\	
+			\hline
+			$\lg(n!) n$ & $\lg(n^n)$ & & & & & \\	
+			\hline			
+		\end{tabular}
+		}
+		
+	\item[\textbf{3-2}]
+		\textbf{\textit{Ordering by asymptotic growth rates}
+			\begin{enumerate}
+				\item Rank the following functions by order of growth; that is, find an arrangement $g_1, g_2, \dots , g_30$ of the functions satisfying $g_1 = \Omega (g_2), g_2 D \Omega (g_3), \dots,g_29 = \Omega (g_30)$s. Partition your list into equivalence classes such that functions $f(n)$ and $g(n)$ are in the same class if and only if $f(n) = \Theta(g(n))$.
+				\begin{tabular}{c c c c c c}
+				
+				\end{tabular}
+				
+			\end{enumerate}
+		}
+	
+\end{enumerate}
+
+
+\chapter{Divide-and-Conquer}
+
+\section{The maximum-subarray problem}
+
+\section{Strassen’s algorithm for matrix multiplication}
+
+\section{The substitution method for solving recurrences}
+
+\section{The recursion-tree method for solving recurrences}
+
+\section{The master method for solving recurrences}
+
+\section{Proof of the master theorem}
+
+\subsection*{Problems}
+
+
+\chapter{Probabilistic Analysis and Randomized Algorithms}
+
+\section{The hiring problem}
+
+\section{Indicator random variables}
+
+\section{Randomized algorithms}
+
+\section{Probabilistic analysis and further uses of indicator random variables}
+
+\subsection*{Problems}
+
+
+\chapter{Heapsort}
+
+\section{Heaps}
+
+\section{Maintaining the heap property}
+
+\section{Building a heap}
+
+\section{The heapsort algorithm}
+
+\section{Priority queues}
+
+\subsection*{Problems}
+
+
+\chapter{Quicksort}
+
+\section{Description of quicksort}
+
+\section{Performance of quicksort}
+
+\section{A randomized version of quicksort}
+
+\section{Analysis of quicksort}
+
+\subsection*{Problems}
+
+
+\chapter{Sorting in Linear Time}
+
+\section{Lower bounds for sorting}
+
+\section{Counting sort}
+
+\section{Radix sort}
+
+\section{Bucket sort}
+
+\subsection*{Problems}
+
+
+\chapter{Medians and Order Statistics}
+
+\section{Minimum and maximum}
+
+\section{Selection in expected linear time}
+
+\section{Selection in worst-case linear time}
+
+\subsection*{Problems}
+
+
+\chapter{Elementary Data Structures}
+
+\section{Stacks and queues}
+
+\section{Linked lists}
+
+\section{Implementing pointers and objects}
+
+\section{Representing rooted trees}
+
+\subsection*{Problems}
 
 \end{document}
