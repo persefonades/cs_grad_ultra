@@ -721,7 +721,7 @@ Suppose that we had $\exists n_1, c_1, \forall n \geq n_1, c_1g(n) \leq f(n)$ an
 				\hline
 				$\sqrt{n}$ & $2$ & $\lg \lg n$\\ 
 				\hline
-				$\sqrt{n}$ & $1$ & undefined\\
+				$\sqrt{n}$ & $1$ & $undefined$\\
 				\hline
 				$n^{1/3}$ & $2$ & $\lg_3 \lg_2 (n)$\\
 				\hline
@@ -736,14 +736,236 @@ Suppose that we had $\exists n_1, c_1, \forall n \geq n_1, c_1g(n) \leq f(n)$ an
 \chapter{Divide-and-Conquer}
 
 \section{The maximum-subarray problem}
+\begin{enumerate}
+	\item[\textbf{Ex 4.1-1}]
+		\textbf{What does FIND-MAXIMUM-SUBARRAY return when all elements of $A$ are negative?}
+	\item[A.]
+	It will return the least negative one. As each of the cross sums are computed, the most positive one must have the shortest possible length. The algorithm doesn’t consider zero sub-arrays, so it must have length 1.
+	
+	\item[\textbf{Ex 4.1-2}]
+		\textbf{Write pseudocode for the brute-force method of solving the maximum subarray problem. Your procedure should run in $\Theta(n^2)$ time.}
+	\item[A.]		
+		\begin{algorithm}[H]
+			\Input{A $\longleftarrow$ Array}
+			\Output{left, right $\longleftarrow$ starting \& ending indexes of subarray in the array}
+
+			$left \longleftarrow 0$\;
+			$right \longleftarrow 0$\;
+			$max \longleftarrow A[0]$\;
+			\tcc{Increment left end of subarray}
+			\For{$i \longleftarrow 0$ \To $n-1$}
+			{
+				$curSum \longleftarrow 0$\;
+				\tcc{Increment right end of subarray}
+				\For{$j \longleftarrow i$ \To $n-1$}
+				{
+					$curSum \longleftarrow curSum + A[j]$\;
+					\If{$curSum > max$}
+					{
+						$max = curSum$\;
+						$left = i$\;
+						$right = j$\;
+					}
+				}
+			}
+			\Return $i$
+
+			\caption{BruteForceMaxSubarray}
+		\end{algorithm}
+		
+	\item[\textbf{Ex 4.1-3}]
+		\textbf{Implement both the brute-force and recursive algorithms for the maximum-subarray problem on your own computer. What problem size $n_0$ gives the crossover point at which the recursive algorithm beats the brute-force algorithm? Then, change the base case of the recursive algorithm to use the brute-force algorithm whenever the problem size is less than $n_0$ . Does that change the crossover point?}
+		
+	\item[\textbf{Ex 4.1-4}]
+		\textbf{Suppose we change the definition of the maximum subarray problem to allow the result to be an empty subarray, where the sum of the values of an empty subarray is 0. How would you change any of the algorithms that do not allow empty subarrays to permit an empty subarray to be the result?}
+	\item[A.]
+	Do a linear scan of the input array to see if it contains any positive entries. If it does, run the algorithm as usual otherwise return the empty subarray with sum 0 and terminate the algorithm.
+		
+	\item[\textbf{Ex 4.1-5}]
+		\textbf{Use the following ideas to develop a nonrecursive, linear-time algorithm for the maximum subarray problem. Start at the left end of the array, and progress toward the right, keeping track of the maximum subarray seen so far. Knowing a maximum subarray of $A[1 \dots j]$, extend the answer to find a maximum subarray ending at index $j+1$ by using the following observation: a maximum subarray of $A[1 \dots j+1]$ is either a maximum subarray of $A[1 \dots j]$ or a subarray $A[i \dots j+1]$, for some $1 \leq i \leq j+1$. Determine a maximum subarray of the form $A[i \dots j+1]$ in constant time based on knowing a maximum subarray ending at index $j$.}		
+\end{enumerate}
 
 \section{Strassen’s algorithm for matrix multiplication}
+\begin{enumerate}
+	\item[\textbf{Ex 4.2-1}]
+		\textbf{Use Strassen's algorithm to compute the matrix product\\
+			\[			
+			\begin{pmatrix}	1 & 3 \\ 7 & 5 \end{pmatrix}
+			\begin{pmatrix}	1 & 3 \\ 7 & 5 \end{pmatrix}\\
+			\]
+		Show your work.}
+	\item[A.]
+		$S_1$ = 8 - 2 = 6\\
+		$S_2$ = 1 + 3 = 4\\
+		$S_3$ = 7 + 5 = 12\\
+		$S_4$ = 4 - 6 = -2\\
+		$S_5$ = 1 + 5 = 6\\
+		$S_6$ = 6 + 2 = 8\\
+		$S_7$ = 3 - 5 = -2\\
+		$S_8$ = 4 + 2 = 6\\
+		$S_9$ = 1 - 7 = -6\\
+		$S_{10}$ = 6 + 8 = 14
+		
+		$P_1$ = 6, $P_2$ = 8, $P_3$ = 72, 
+		$P_4$ = -10, $P_5$ = 48, $P_6$ = -12,
+		$P_7$ = -84\\
+		
+		$C_{11}$ = 48 - 10 - 8 - 12 = 18 \\ 
+		$C_{12}$ = 6 + 8 = 14 \\
+		$C_{21}$ = 72 - 10 = 62 \\
+		$C_{22}$ = 48 + 6 - 72 + 84 = 96 \\
+		So, we get the final result:
+		\[
+		\begin{pmatrix} 18 & 14 \\ 62 & 96 \end{pmatrix}
+		\]  
+		
+	\item[\textbf{Ex 4.2-2}]
+		\textbf{Write pseudocode for Strassen’s algorithm.}
+	\item[A.]
+		\begin{algorithm}[H]
+		\tcc{Let $A[i \dots j][k \dots m]$ denote the submatrix of $A$ consisting of rows $i$ through $j$ and columns $k$ through $m$.}
+		
+		\If{$A$.length = 1}
+		{
+			\Return $A[0] . B[0]$
+		}
+		\tcc{Let $C$ be a new $n \times n$ matrix}
+		$A11 \longleftarrow A[0 \dots n/2-1][0 \dots n/2-1]$\;
+		$A12 \longleftarrow A[0 \dots n/2-1][n/2 \dots n-1]$\;
+		$A21 \longleftarrow A[n/2 \dots n-1][0 \dots n/2-1]$\;
+		$A22 \longleftarrow A[n/2 \dots n-1][n/2 \dots n-1]$\;
+		$S1 = B12 - B22$\;
+		$S2 = A11 + A12$\;
+		$S3 = A21 + A22$\;
+		$S4 = B21 - B11$\;
+		$S5 = A11 + A22$\;
+		$S6 = B11 + B22$\;
+		$S7 = A12 - A22$\;
+		$S8 = B21 + B22$\;
+		$S9 = A11 - A21$\;
+		$S10 = B11 + B12$\;
+		$P1 = Strassen(A11, S1)$\;
+		$P2 = Strassen(S2, B22)$\;
+		$P3 = Strassen(S3, B11)$\;
+		$P4 = Strassen(A22, S4)$\;
+		$P5 = Strassen(S5, S6)$\;
+		$P6 = Strassen(S7, S8)$\;
+		$P7 = Strassen(S9, S10)$\;
+		$C[0 \dots n/2-1][0 \dots n/2-1] = P5 + P4 - P2 + P6$\;
+		$C[0 \dots n/2-1][n/2 \dots n-1] = P1 + P2$\;
+		$C[n/2 \dots n-1][0 \dots n/2-1] = P3 + P4$\;
+		$C[n/2 \dots n-1][n/2 \dots n-1] = P5 + P1 - P3 - P7$;
+		\Return $C$\;
+		\caption{Strassen}
+		\end{algorithm}
+		
+	\item[\textbf{Ex 4.2-3}]
+		\textbf{How would you modify Strassen’s algorithm to multiply $n \times n$ matrices in which $n$ is not an exact power of 2? Show that the resulting algorithm runs in time $\Theta(n^{\lg 7})$.}
+	\item[A.]
+	We can pad out the input matrices to the next largest powers of 2 and run the given algorithm. This will at most double the value of n because each power of 2 is off from each other by a factor of 2. So, this will have runtime \\
+	$m^{\lg 7} \leq (2n)^{\lg 7} = 7n^{\lg 7} \in O(n^{\lg 7})$ and $m^{\lg 7} \geq n^{\lg 7} \in \Omega(n^{\lg 7})$ \\
+	Putting these together, we get the runtime is $\Theta(n^{\lg 7})$.
+	
+	\item[\textbf{Ex 4.2-4}]
+		\textbf{What is the largest $k$ such that if you can multiply $3 \times 3$ matrices using $k$ multiplications (not assuming commutativity of multiplication), then you can multiply $n \times n$ matrices in time $o(n^{\lg 7})$? What would the running time of this algorithm be?}
+	\item[A.]
+	Assume that $n=3^m$ for some $m$, then using block matrix multiplication, we obtain the recursive running time $T(n) = kT(n/3) + O(1)$. Using the Master theorem, we need the largest integer $k$ such that $\log_3 k < \lg 7$. This is given by $k=21$.
+
+	\item[\textbf{Ex 4.2-5}]
+		\textbf{V. Pan has discovered a way of multiplying $\mathbf{68 \times 68}$ matrices using 132,464 multiplications, a way of multiplying $\mathbf{70 \times 70}$ matrices using 143,640 multiplications, and a way of multiplying $\mathbf{72 \times 72}$ matrices using 155,424 multiplications. Which method yields the best asymptotic running time when used in a divide-and-conquer matrix-multiplication algorithm? How does it compare to Strassen’s algorithm?}	
+	
+	\item[\textbf{Ex 4.2-6}]
+		\textbf{How quickly can you multiply a $k n \times n$ matrix by an $n \times k n$ matrix, using Strassen’s algorithm as a subroutine? Answer the same question with the order of the input matrices reversed.}
+		
+	\item[\textbf{Ex 4.2-7}]
+		\textbf{Show how to multiply the complex numbers $a + bi$ and $c + di$ using only three multiplications of real numbers. The algorithm should take $a$, $b$, $c$, and $d$ as input and produce the real component $ac - bd$ and the imaginary component $ad + bc$ separately}
+	\item[A.]
+	We can see that the final result should be
+	\[ (a+bi) (c+di) = ac-bd+(cb + ad)i \]
+	We will be multiplying \\
+	\[ P1 = (a+b)c = ac + bc,\ P2 = b(c+d) = bc + bd,\ P3 = (a-b)d \]
+	We can get real part by taking $P1-P2$ and imaginary part by taking $P2+P3$.
+\end{enumerate}
 
 \section{The substitution method for solving recurrences}
+\begin{enumerate}
+	\item[\textbf{Ex 4.3-1}]
+		\textbf{Show that the solution of $T(n) = T(n-1)+n$ is $O(n^2)$.}
+	\item[A.]
+	Assume by induction, $T(n) \leq cn^2$, where $c$ is taken to be max(1, $T(1)$), then
+	\[ T(n) = T(n-1) + n \leq c(n-1)^2 + n = cn^2 + (1-2c)n + 1 \leq cn^2 + 2 - 2c \leq cn^2 \]
+By inductive hypothesis from the first inequality, the second from the fact that $n \geq 1$ and $1-2c<0$ and from the fact that $c \geq 1$.
+
+	\item[\textbf{Ex 4.3-2}]
+		\textbf{Show that the solution of $T(n) = T(\lceil n/2 \rceil) + 1$ is $O(\lg n)$.}
+	\item[A.]
+	Assume $T(n) \leq 3\log n - 1$, which implies $T(n) = O(\lg n)$.
+	\begin{equation*}
+		\begin{split}
+			T(n) & = T(\lceil n/2 \rceil) + 1 \\
+			& \leq 3 \lg(\lceil n/2 \rceil) -1 + 1 \\
+			& \leq 3 \lg(3n/4)\\
+			& = 3\lg n + 3\lg(3/4)\\
+			& \leq 3\lg n + \lg(1/2)\\
+			& = 3\lg n - 1
+		\end{split}
+	\end{equation*}
+	
+	\item[\textbf{Ex 4.3-3}]
+		\textbf{We saw that the solution of $T(n) = 2T(\lfloor n/2 \rfloor) + n$ is $O(n \lg n)$. Show that the solution of this recurrence is also $\Omega(n \lg n)$. Conclude that the solution is $\Theta(n \lg n)$.}
+		
+	\item[\textbf{Ex 4.3-4}]
+		\textbf{Show that by making a different inductive hypothesis, we can overcome the difficulty with the boundary condition $T(1) = 1$ for recurrence (4.19) without adjusting the boundary conditions for the inductive proof.}
+		
+	\item[\textbf{Ex 4.3-5}]
+		\textbf{Show that $\Theta(n \lg n)$ is the solution to the “exact” recurrence (4.3) for merge sort.}
+		
+	\item[\textbf{Ex 4.3-6}]
+		\textbf{Show that the solution to $T(n) = 2T(\lceil n/2 \rceil + 17) + n$ is $O(n \lg n)$}
+		
+	\item[\textbf{Ex 4.3-7}]
+		\textbf{Using the master method in Section 4.5, you can show that the solution to the recurrence $T(n) = 4T(n/3)+n$ is $T(n) = \Theta(n^{\log_3 4})$. Show that a substitution proof with the assumption $T(n) \leq cn^{\log_3 4}$ fails. Then show how to subtract off a lower-order term to make a substitution proof work.}
+		
+	\item[\textbf{Ex 4.3-8}]
+		\textbf{Using the master method in Section 4.5, you can show that the solution to the recurrence $T(n) = 4T(n/3)+n^2$ is $T(n) = \Theta(n^2)$. Show that a substitution
+proof with the assumption $T(n) \leq cn^2$ fails. Then show how to subtract off a
+lower-order term to make a substitution proof work.}
+	\item[A.]
+	
+
+	\item[\textbf{Ex 4.3-9}]
+		\textbf{Solve the recurrence $T(n) = 3T(n) + \log n$ by making a change of variables. Your solution should be asymptotically tight. Do not worry about whether values are integral.}
+	\item[A.]
+	Consider $n$ of the form $2k$ and then the recurrence becomes
+	\[T(2^k) = 3T(2^{k/2}) + k\]
+	We define $S(k) = T(2^k)$, so $S(k) = 3S(k/2) + k$ \\
+	We use the inductive hypothesis $S(k) \leq (S(1)+2)k^{\lg 3} - 2k$
+	\[ S(k) = 3S(k/2) + k \leq 3 (S(1) +2) (k/2)^{\lg 3} - 3k + k = (S(1) + 2)k^{\lg 3} - 2k \] 
+	as desired. Similarly, we also show that $S(k) \geq (S(1) + 2)k^{\lg 3} - 2k$
+	\[ S(k) = 3S(k/2) + k \geq (S(1) + 2)k^{\lg 3} - 2k\]
+	So, we get $S(k) = (S(1) + 2)k^{\lg 3} - 2k$ and putting this into $T$, $T(2^k) = (T(2) + 2)k^{\lg 3} - 2k$. So, $T(n) = (T(2) + 2)(\lg n)^{\lg 3} - 2\lg(n)$.	
+\end{enumerate}
 
 \section{The recursion-tree method for solving recurrences}
+\begin{enumerate}
+	\item[\textbf{Ex 4.4-1}]
+\end{enumerate}
 
 \section{The master method for solving recurrences}
+\begin{enumerate}
+	\item[\textbf{Ex 4.5-1}]
+		\textbf{Use the master method to give tight asymptotic bounds for the following recurrences.}
+		\begin{enumerate}
+			\item $\mathbf{T(n) = 2T(n/4) + 1}$
+			\item[A.]
+			$a=2$, $b=4$, $f(n)=1=O(n^0)$ \\
+			$T(n) = \Theta(\sqrt{n})$			
+			\item $\mathbf{T(n) = 2T(n/4) + \sqrt{n}}$
+			\item[A.]
+			$a=2$, $b=4$, $f(n)=n^{1/2} = O(n^{1/2})$\\			
+			
+		\end{enumerate}
+\end{enumerate}
 
 \section{Proof of the master theorem}
 
