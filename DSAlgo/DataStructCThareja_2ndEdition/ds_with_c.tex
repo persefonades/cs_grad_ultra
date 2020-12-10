@@ -1,0 +1,186 @@
+% ds_with_c.tex
+\documentclass[fontsize=12pt,paper=a4]{book}
+\usepackage[utf8]{inputenc}
+
+\usepackage{listings}
+
+\begin{document}
+\title{Data Structures using C - Solutions \\
+ \large 2nd Edition}
+\author{Purbayan Chowdhury}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction to C}
+
+\section{Review Questions}
+
+\begin{enumerate}
+ \item Discuss the structure of a C program.
+ \item[A.]
+       A C program contains one or more functions where a function is defined as a group of statements that perform a well-defined task. The statements in a function are written in a logical sequence to perform a specific task.
+       
+ \item Differentiate between declaration and definition.
+ \item[A.] item
+       
+ \item How is memory reserved using a declaration statement?
+ \item[A.] item
+       
+ \item What do you understand by identifiers and keywords?
+ \item[A.]
+       Identifiers are basically names given to program elements such as variables, arrays, and functions. They are formed by using a sequence of letters (both uppercase and lowercase), numerals, and underscores.\\
+       Keywords are list of reserved keywords that cannot be used as an identifier and all keywords are basically a sequence of character that have a fixed meaning. The common keywords are\\
+       \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        auto   & break  & case     & char   & const    & continue & default  & do     \\
+        \hline
+        double & else   & enum     & extern & float    & for      & goto     & if     \\
+        \hline
+        int    & long   & register & return & short    & signed   & sizeof   & static \\
+        \hline
+        struct & switch & typedef  & union  & unsigned & void     & volatile & while  \\
+        \hline
+       \end{tabular}
+       
+ \item Explain the terms variables and constants. How many types of variables are supported by C?
+ \item[A.] A variable is defined as a meaningful name given to a data storage location in the computer
+       memory. When using a variable, we actually refer to the address of the memory where the data
+       is stored.\\
+       A constant is an identifier whose value does not change. Constants are used to define fixed values like pi or the charge on an electron so that their value does not get changed in the program even by mistake.\\
+       There are two kind of variables are supported by C are numeric and character.
+       
+ \item What does the data type of a variable signify?
+ \item[A.]
+       The data type of a variable signifies that data type determines the set of values that a data item can take and the operations that can be performed on the item.
+       
+ \item Write a short note on basic data types that the C language supports.
+ \item[A.] C language provides four basic data types.\\\\
+       \begin{tabular}{|c|c|c|c|}
+        \hline
+        Data Type & Size in Bytes & Range                & Use                                 \\
+        \hline
+        char      & 1             & –128 to 127          & To store characters                 \\
+        int       & 2             & –32768 to 32767      & To store integer numbers            \\
+        float     & 4             & 3.4E–38 to 3.4E+38   & To store floating point numbers     \\
+        double    & 8             & 1.7E–308 to 1.7E+308 & To store big floating point numbers \\
+        \hline
+       \end{tabular}
+       
+ \item Why do we include $<stdio.h>$ in our programs?
+ \item[A.]
+       We include $<stdio.h>$ in our programs because it is a header file that contains standardized input and output functions. Functions commonly used from $<stdio.h>$ are $scanf()$ and $printf()$.
+       
+ \item What are header files? Explain their significance.
+ \item[A.] item
+       
+ \item Write short notes on printf and scanf functions.
+ \item Write a short note on operators available in C language.
+ \item Draw the operator precedence chart.
+ \item Differentiate between typecasting and type conversion.
+ \item What are decision control statements? Explain in detail.
+ \item Write a short note on the iterative statements that C language supports.
+ \item When will you prefer to work with a switch statement?
+ \item Define function. Why are they needed?
+ \item Differentiate between function declaration and function definition.
+ \item Why is function declaration statement placed prior to function definition?
+ \item Explain the concept of making function calls.
+ \item Differentiate between call by value and call by reference using suitable examples.
+ \item Write a short note on pointers.
+ \item Explain the difference between a null pointer and a void pointer.
+ \item How are generic pointers different from other pointer variables?
+ \item Write a short note on pointers to pointers.
+\end{enumerate}
+
+\section{Programming Exercises}
+
+\begin{enumerate}
+ \item Write a program to read 10 integers. Display these numbers by printing three numbers in a line
+       separated by commas.
+ \item Write a program to print the count of even numbers between 1–200. Also print their sum.
+ \item Write a program to count the number of vowels in a text.
+ \item Write a program to read the address of a user. Display the result by breaking it in multiple lines.
+ \item Write a program to read two floating point numbers. Add these numbers and assign the result to an integer. Finally, display the value of all the three variables.
+ \item Write a program to read a floating point number. Display the rightmost digit of the integral part of the number.
+ \item Write a program to calculate simple interest and compound interest.
+ \item Write a program to calculate salary of an employee given his basic pay (to be entered by the user), HRA = 10\% of the basic pay, TA = 5\% of basic pay. Define HRA and TA as constants and use them to calculate the salary of the employee.
+ \item Write a program to prepare a grocery bill. Enter
+       the name of the items purchased, quantity in which
+       it is purchased, and its price per unit. Then display
+       the bill in the following format:
+       \begin{lstlisting}
+******************** B I L L ********************
+–––––––––––––––––––––––––––––––––––––––––––––––––
+Item            Quantity    Price       Amount
+–––––––––––––––––––––––––––––––––––––––––––––––––
+–––––––––––––––––––––––––––––––––––––––––––––––––
+Total Amount to be paid
+–––––––––––––––––––––––––––––––––––––––––––––––––
+       \end{lstlisting}
+ \item Write a C program using printf statement to print BYE in the following format:
+       \begin{lstlisting}
+ BBB  Y			 Y  EEEE
+ B  B		Y		Y   E
+ BBB			Y     EEEE
+ B  B			Y     E
+ BBB      Y     EEEE
+       \end{lstlisting}
+ \item Write a program to read an integer. Display the value of that integer in decimal, octal, and
+       hexadecimal notation.
+ \item Write a program that prints a floating point value in exponential format with the following
+       specifications:
+       \begin{itemize}
+        \item correct to two decimal places;
+        \item correct to four decimal places; and
+        \item correct to eight decimal places.
+       \end{itemize}
+ \item Write a program to find the smallest of three integers using functions.
+ \item Write a program to calculate area of a triangle using function.
+ \item Write a program to find whether a number is divisible by two or not using functions.
+ \item Write a program to print ‘Programming in C is Fun’ using pointers.
+ \item Write a program to read a character and print it. Also print its ASCII value. If the character is in lower case, print it in upper case and vice versa. Repeat the process until a ‘*’ is entered.
+ \item Write a program to add three floating point numbers. The result should contain only two digits
+       after the decimal.
+ \item Write a program to take input from the user and then check whether it is a number or a
+       character. If it is a character, determine whether it is in upper case or lower case. Also print its ASCII value.
+ \item Write a program to display sum and average of numbers from 1 to n . Use for loop.
+ \item Write a program to print all odd numbers from m to n .
+ \item Write a program to print all prime numbers from m to n .
+ \item Write a program to read numbers until –1 is entered and display whether it is an Armstrong
+       number or not.
+ \item Write a program to add two floating point numbers using pointers and functions.
+ \item Write a program to calculate area of a triangle using pointers.
+\end{enumerate}
+
+\chapter{Introduction to Data Structures and Algorithms}
+
+\chapter{Arrays}
+
+\chapter{Strings}
+
+\chapter{Structures and Unions}
+
+\chapter{Linked Lists}
+
+\chapter{Stacks}
+
+\chapter{Queues}
+
+\chapter{Trees}
+
+\chapter{Efficient Binary Trees}
+
+\chapter{Multi-way Search Trees}
+
+\chapter{Heaps}
+
+\chapter{Graphs}
+
+\chapter{Searching and Sorting}
+
+\chapter{Hashing and Collision}
+
+\chapter{Files and Their Organization}
+
+\end{document}

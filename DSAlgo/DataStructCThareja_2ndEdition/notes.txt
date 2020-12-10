@@ -1,0 +1,128 @@
+Multiple-choice Questions
+1. The operator which compares two values is
+(a) Assignment
+(b) Relational
+(c) Unary
+(d) Equality
+2. Ternary operator operates on how many operands?
+(a) 1
+(b) 2
+(c) 3
+(d) 4
+3. Which operator produces the one’s complement
+of the given binary value?
+(a) Logical AND
+(b) Bitwise AND
+(c) Logical OR
+(d) Bitwise NOT
+4. Which operator has the lowest precedence?
+(a) Sizeof
+(b) Unary
+(c) Assignment
+(d) Comma
+5. Which of the following is the conversion character
+associated with short integer?
+(a) %c
+(b) %h
+(c) %e
+(d) %f
+6. Which of the following is not a character constant?
+(a) ‘A’
+(b) “ A ”
+(c) ‘ ’
+(d) ‘*’
+7. Which of the following is a valid variable name?
+(a) Initial.Name
+(b) A+B
+(c) $amt
+(d) Floats
+8. Which operator cannot be used with floating point
+numbers?
+(a) +
+(b) –
+(c) %
+(d) *
+9. Identify the erroneous expression.
+(a) X=y=2, 4;
+(b) res = ++a * 5;
+(c) res = /4;
+(d) res = a++ –b *2
+10. Function declaration statement identifies a
+function with its
+(a) Name
+(b) Arguments
+(c) Data type of return value
+(d) All of these
+11. Which return type cannot return any value to the
+calling function?
+(a) int
+(b) float
+(c) void
+(d) double
+12. Memory is allocated for a function when the
+function is
+(a) declared
+(b) defined
+(c) called
+(d) returned
+13. *(&num) is equivalent to writing
+(a) &num
+(b) *num
+(c) num
+(d) None of these
+14. Which operator retrieves the lvalue of a variable?
+(a) &
+(b) *
+(c) –>
+(d) None of these
+15. Which operator is used to dereference a pointer?
+(a) &
+(b) *
+(c) –>
+(d) None of these
+True or False
+1.
+2.
+3.
+4.
+We can have only one function in a C program.
+Keywords are case sensitive.
+Variable ‘first’ is the same as ‘First’.
+Signed variables can increase the maximum
+positive range.
+5. Comment statements are not executed by the
+compiler.
+6. Equality operators have higher precedence than
+the relational operators.
+7. Shifting once to the left multiplies the number by 2.
+8. Decision control statements are used to repeat
+the execution of a list of statements.
+9. printf( " %d " , scanf( " %d " , &num)); is a valid C
+statement.
+10. 1,234 is a valid integer constant.
+11. A printf statement can generate only one line of
+output.
+12. stdio.h is used to store the source code of the
+program.
+13. The closing brace of main() is the logical end of
+the program.
+14. The declaration section gives instructions to the
+computer.
+15. Any valid printable ASCII character can be used
+for a variable name.
+16. Underscore can be used anywhere in the variable
+name.
+17. void is a data type in C.
+18. All arithmetic operators have same precedence.
+19. The modulus operator can be used only with
+integers.
+20. The calling function always passes parameters to
+the called function.
+21. The name of a function is global.
+22. No function can be declared within the body of
+another function.
+23. The & operator retrieves the lvalue of the variable.
+24. Unary increment and decrement operators have
+greater precedence than the dereference operator.
+25. On 32-bit systems, an integer variable is allocated
+4 bytes.
